@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS | To-do List</title>
+</head>
+<style>
+    @font-face {
+        font-family: Glitten;
+        src: url('fonts/Glitten-Regular.ttf');
+    }
+
+    @font-face {
+        font-family: Century-Gothic;
+        src: url('fonts/Century\ Gothic.ttf') format('truetype');
+    }
+
+    * {
+        box-sizing: border-box;
+        margin: 0; padding: 0;
+        font-weight: 400;
+        font-family: Century-Gothic;
+    }
+
+    input {
+        border: none;
+    }
+
+    body {
+        background-color: #6D9776;
+    }
+
+    .f-glitten { font-family: Glitten;}
+
+    .section-to_do_list {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+    
+    .wrap-to_do_list {
+        background: white;
+        width: 400px;
+        height: 90vh;
+        border-radius: 5px;
+        overflow-y: auto;
+        box-shadow: #5C6369 0 30px 60px 80%;
+        padding: 32px 24px;
+    }
+
+    .list-header h1 {
+        font-size: 40px;
+    }
+
+    .task {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .task-name {
+        font-weight: 600;
+        font-size: 20px;
+    }
+
+    .task-descri {
+        font-size: 15px;
+    }
+</style>
+<body>
+    <!-- Popup -->
+    <aside class="popup">
+        <div class="overlay">
+        </div>
+
+        <div class="popup-content">
+            <input type="text" id="task" placeholder="Tarefa">
+            <input type="text" id="description" placeholder="Descrição">
+
+            <button class="" onclick="addTask()">
+                ADICIONAR
+            </button>
+        </div>
+    </aside>
+
+    <!-- To-do List -->
+    <section class="section-to_do_list">
+        <div class="wrap-to_do_list">
+            <div class="list-header">
+                <h1 class="f-glitten">TO-DO List</h1>
+
+            </div>
+            
+            <div class="wrap-list" style="margin: 8px 0px;" id="tasks">
+               <div class="task">
+                    <div class="task-info">
+                        <div class="task-name">Nome</div>
+                        <div class="task-descri">Descrição</div>
+                    </div>
+
+                    <div class="task-checkbox">
+                        <input type="checkbox">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+<script>
+    function addTask(){
+        var taskName = document.getElementById("task").value;
+        var taskDescri = document.getElementById("description").value;
+        const tasks = document.getElementById("tasks");
+
+        if (taskName.trim() !== "") {
+            var taskDiv = document.createElement("div");
+            var taskInfo = document.createElement("div");
+            var taskItemName = document.createElement("div");
+            var taskItemDescri = document.createElement("div");
+            var taskCheckbox = document.createElement("div");
+            var taskItemCheckbox = document.createElement("input")
+
+            taskItemCheckbox.type = "checkbox";
+
+            taskItemName.innerText = taskName;
+            taskItemDescri.innerText = taskDescri;
+
+            taskInfo.appendChild(taskItemName);
+            taskInfo.appendChild(taskItemDescri);
+
+            taskDiv.appendChild(taskInfo);
+            taskDiv.appendChild(taskCheckbox)
+
+            taskDiv.classList.add("task");
+            taskItemName.classList.add("task-name");
+            taskItemDescri.classList.add("task-descri");
+            taskInfo.classList.add("task-info");
+            
+            tasks.appendChild(taskDiv);
+
+            document.getElementById("task").value = "";
+            document.getElementById("description").value = "";
+        }
+    }
+</script>
+</html>
